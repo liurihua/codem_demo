@@ -1,0 +1,33 @@
+{
+  "projects": [
+    {
+      "id": "project-codem-demo",
+      "slug": "codem-demo",
+      "name": "CodeM 客户协作平台",
+      "customer": "示例客户 · 星河科技",
+      "summary": "面向客户的项目演示与需求反馈空间。客户可以查看当前进展、提交修改意见，并持续跟踪处理状态。",
+      "stage": "方案确认中",
+      "progress": 68,
+      "updatedAt": "2026-08-27T08:00:00.000Z",
+      "highlights": ["首页与品牌视觉已完成", "客户反馈流程已打通", "管理端状态流转可用"],
+      "feedback": [
+        {
+          "id": "feedback-demo-1",
+          "author": "王女士",
+          "contact": "wang@example.com",
+          "content": "希望首页能更突出项目目前的完成进度，并补充移动端展示效果。",
+          "status": "修改中",
+          "createdAt": "2026-08-26T09:30:00.000Z"
+        },
+        {
+          "id": "feedback-demo-2",
+          "author": "陈先生",
+          "contact": "",
+          "content": "整体方向符合预期，请将主色调整得更沉稳一些。",
+          "status": "已完成",
+          "createdAt": "2026-08-25T03:20:00.000Z"
+        }
+      ]
+    }
+  ]
+}
