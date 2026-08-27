@@ -1,4 +1,8 @@
 {
+  "theme": {
+    "primary": "#173e2d",
+    "accent": "#d46442"
+  },
   "projects": [
     {
       "id": "project-codem-demo",

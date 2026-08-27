@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { addFeedback, changeFeedbackStatus } from "@/lib/store";
+import { addFeedback, changeFeedbackStatus, changeTheme } from "@/lib/store";
 import type { FeedbackStatus } from "@/lib/types";
 import { clearAdminSession, createAdminSession, isAdmin, validPassword } from "@/lib/auth";
 
@@ -40,4 +40,17 @@ export async function updateFeedbackStatus(form: FormData) {
   if (!["待处理", "修改中", "待确认", "已完成"].includes(status)) throw new Error("状态无效");
   await changeFeedbackStatus(projectId, feedbackId, status);
   revalidatePath("/admin");
+}
+
+export async function updateTheme(form: FormData) {
+  if (!(await isAdmin())) redirect("/admin");
+  const primary = text(form, "primary", 7);
+  const accent = text(form, "accent", 7);
+  const hex = /^#[0-9a-fA-F]{6}$/;
+  if (!hex.test(primary) || !hex.test(accent)) redirect("/admin?themeError=1#theme");
+  await changeTheme({ primary: primary.toLowerCase(), accent: accent.toLowerCase() });
+  revalidatePath("/");
+  revalidatePath("/admin");
+  revalidatePath("/p/[slug]", "page");
+  redirect("/admin?themeSaved=1#theme");
 }

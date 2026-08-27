@@ -1,9 +1,10 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
-import type { Feedback, FeedbackStatus, Store } from "./types";
+import type { Feedback, FeedbackStatus, Store, Theme } from "./types";
 
 const dataDir = path.join(process.cwd(), "data");
 const dataFile = path.join(dataDir, "store.json");
+const defaultTheme: Theme = { primary: "#173e2d", accent: "#d46442" };
 
 async function readStore(): Promise<Store> {
   const raw = await fs.readFile(dataFile, "utf8");
@@ -19,6 +20,16 @@ async function writeStore(store: Store) {
 
 export async function listProjects() {
   return (await readStore()).projects;
+}
+
+export async function getTheme() {
+  return (await readStore()).theme || defaultTheme;
+}
+
+export async function changeTheme(theme: Theme) {
+  const store = await readStore();
+  store.theme = theme;
+  await writeStore(store);
 }
 
 export async function getProject(slug: string) {

@@ -22,4 +22,9 @@ export type Project = {
   feedback: Feedback[];
 };
 
-export type Store = { projects: Project[] };
+export type Theme = {
+  primary: string;
+  accent: string;
+};
+
+export type Store = { theme?: Theme; projects: Project[] };
