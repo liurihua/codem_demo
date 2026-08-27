@@ -28,6 +28,28 @@ npm run dev
 
 请在 `.env.local` 中修改管理员密码。未配置时，开发环境默认密码为 `codem-demo`。
 
+## 一键重启
+
+首次使用先增加执行权限：
+
+```bash
+chmod +x restart.sh
+```
+
+以后在项目目录执行：
+
+```bash
+./restart.sh
+```
+
+脚本会依次停止该项目的旧进程、执行生产构建，并在后台重新启动服务。运行日志保存在 `.runtime/server.log`。
+
+如需修改端口：
+
+```bash
+PORT=3001 ./restart.sh
+```
+
 ## 让局域网客户访问
 
 ```bash
