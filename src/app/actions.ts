@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { addFeedback, changeFeedbackStatus, changeTheme } from "@/lib/store";
 import type { FeedbackStatus } from "@/lib/types";
-import { clearAdminSession, createAdminSession, isAdmin, validPassword } from "@/lib/auth";
 
 function text(form: FormData, key: string, max: number) {
   return String(form.get(key) || "").trim().slice(0, max);
@@ -21,19 +20,7 @@ export async function submitFeedback(slug: string, form: FormData) {
   redirect(`/p/${slug}?sent=1#feedback`);
 }
 
-export async function loginAdmin(form: FormData) {
-  if (!validPassword(text(form, "password", 200))) redirect("/admin?error=1");
-  await createAdminSession();
-  redirect("/admin");
-}
-
-export async function logoutAdmin() {
-  await clearAdminSession();
-  redirect("/admin");
-}
-
 export async function updateFeedbackStatus(form: FormData) {
-  if (!(await isAdmin())) redirect("/admin");
   const projectId = text(form, "projectId", 80);
   const feedbackId = text(form, "feedbackId", 80);
   const status = text(form, "status", 20) as FeedbackStatus;
@@ -43,7 +30,6 @@ export async function updateFeedbackStatus(form: FormData) {
 }
 
 export async function updateTheme(form: FormData) {
-  if (!(await isAdmin())) redirect("/admin");
   const primary = text(form, "primary", 7);
   const accent = text(form, "accent", 7);
   const hex = /^#[0-9a-fA-F]{6}$/;

@@ -17,7 +17,6 @@
 
 ```bash
 npm install
-cp .env.example .env.local
 npm run dev
 ```
 
@@ -26,7 +25,7 @@ npm run dev
 - 客户首页：[http://localhost:3000](http://localhost:3000)
 - 管理后台：[http://localhost:3000/admin](http://localhost:3000/admin)
 
-请在 `.env.local` 中修改管理员密码。未配置时，开发环境默认密码为 `codem-demo`。
+管理后台无需登录，访问 `/admin` 即可进入。
 
 ## 一键重启
 
